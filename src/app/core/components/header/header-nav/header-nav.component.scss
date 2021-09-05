@@ -1,0 +1,50 @@
+:host{
+  height: 90px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo{
+  display: block;
+  width: 90px;
+  height: 90px;
+}
+
+.nav-btn_item{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background: #e52e6b;
+  margin: 8px 6px 8px 8px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.nav-btn_iten span {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.pressed  .nav-btn_item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background: #ebedf0;
+  margin: 8px 6px 8px 8px;
+  border-radius: 50%;
+  overflow: hidden;
+
+}
+
+.pressed .nav-btn_item::before{
+  content: url(../../../../../assets/icons/catalog-btn.svg);
+  position: relative;
+  color: #ebedf0;
+}

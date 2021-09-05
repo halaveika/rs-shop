@@ -1,0 +1,34 @@
+.contact-item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-item:last-child:before,
+.nav-item:first-child:before
+{
+  content: "";
+  display: block;
+  height: 24px;
+  border-left: 1px solid gray;
+}
+
+.dropdown-menu > .contact-item:last-child:before {
+  content: "";
+  display: block;
+  width: 120px;
+  border-top: 1px solid gray;
+}
+
+.nav-item-text{
+  display: block;
+  font-size: 0.7rem;
+}
+
+.telegram-img {
+  width: 24px;
+  height: 24px;
+}
+

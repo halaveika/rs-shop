@@ -1,0 +1,54 @@
+<button class="nav-btn dropdown m-2">
+  <a class="nav-link dropdown-toggle login-btn_link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <img class="d-block m-1" src="../../../../../../assets/icons/login.svg" alt="login">
+    <span class="login-btn_text">Аккаунт</span>
+  </a>
+  <ul class="dropdown-menu account-menu" aria-labelledby="navbarDropdownMenuLink">
+    <li class="m-2 contact-item">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-enter" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Войти
+      </button>
+    </li>
+    <li class="m-2 contact-item">
+      <img class="m-1" src="../../../../../../assets/icons/bascet.svg" alt="bascet">
+      <span >Корзина</span>
+      <span class="counter">99</span>
+    </li>
+    <li class="m-2 contact-item">
+      <img class="m-1" src="../../../../../../assets/icons/favorites.svg" alt="favotires">
+      <span >Избранные товары</span>
+      <span class="counter">99</span>
+    </li>
+    <li class="m-2 contact-item">
+      <img class="m-1" src="../../../../../../assets/icons/view.svg" alt="view">
+      <span>Просмотренные</span>
+      <span class="counter">99</span>
+    </li>
+  </ul>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title login-title" id="exampleModalLabel">Вход</h5>
+        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Электронная почта</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Пароль">
+          <label for="floatingPassword">Пароль</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary">Войти</button>
+      </div>
+    </div>
+  </div>
+</div>
