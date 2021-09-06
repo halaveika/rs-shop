@@ -11,6 +11,8 @@ import { HeaderContactComponent } from './components/header/header-info/header-c
 import { SearchComponent } from './components/header/header-nav/search/search.component';
 import { LoginBtnComponent } from './components/header/header-nav/login-btn/login-btn.component';
 import { BasketBtnComponent } from './components/header/header-nav/basket-btn/basket-btn.component';
+import { FooterContactsComponent } from './components/footer/footer-contacts/footer-contacts.component';
+import { FooterSocialComponent } from './components/footer/footer-social/footer-social.component';
 
 
 
@@ -25,7 +27,9 @@ import { BasketBtnComponent } from './components/header/header-nav/basket-btn/ba
     HeaderContactComponent,
     SearchComponent,
     LoginBtnComponent,
-    BasketBtnComponent
+    BasketBtnComponent,
+    FooterContactsComponent,
+    FooterSocialComponent
   ],
   exports: [
     HeaderComponent,

@@ -5,6 +5,22 @@ body {
   color: #1A1A1A;
 }
 
+.contact-item {
+  margin-left: 6vw;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &:first-child{
+    margin-left: 0;
+  }
+}
+
+
+
+
 .nav-btn {
   border: 1px solid #d5d7db;
   display: flex;
@@ -31,4 +47,119 @@ body {
   margin-right: 8px;
   background: #dfdfe0;
   transition: .2s ease;
+}
+
+.a1{
+  position: relative;
+
+  &::before{
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-image: url('./assets/icons/A1.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: -30px;
+  }
+
+}
+
+.life{
+  position: relative;
+
+  &::before{
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-image: url('./assets/icons/smile.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: -30px;
+  }
+
+}
+
+.phone {
+  position: relative;
+
+  &::before{
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-image: url('./assets/icons/phone.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: -30px;
+  }
+
+}
+
+
+
+
+.viber {
+  position: relative;
+
+  &::before{
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-image: url('./assets/icons/viber.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: -30px;
+  }
+
+}
+
+.telegram {
+  position: relative;
+
+  &::before{
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-image: url('./assets/icons/telegram.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: -30px;
+  }
+
+}
+
+.mail {
+  position: relative;
+
+  &::before{
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-image: url('./assets/icons/mail.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: -30px;
+  }
+
+}
+
+.message {
+  position: relative;
+
+  &::before{
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-image: url('./assets/icons/message.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: -30px;
+  }
+
 }

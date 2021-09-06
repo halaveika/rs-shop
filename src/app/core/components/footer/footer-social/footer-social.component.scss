@@ -1,0 +1,31 @@
+:host{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.social-item {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(177, 206, 207);
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0.2vw;
+
+  & img{
+    width: 70%;
+    height: 70%;
+  }
+
+  &:hover{
+    transition:0.5s ease-in-out;
+    transform: scale(1.2);
+  }
+}
+
