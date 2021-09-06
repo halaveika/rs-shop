@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SharedModule } from '@shared/shared.module';
@@ -13,6 +13,8 @@ import { LoginBtnComponent } from './components/header/header-nav/login-btn/logi
 import { BasketBtnComponent } from './components/header/header-nav/basket-btn/basket-btn.component';
 import { FooterContactsComponent } from './components/footer/footer-contacts/footer-contacts.component';
 import { FooterSocialComponent } from './components/footer/footer-social/footer-social.component';
+import {ServerShopService} from './services/server-shop.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 
@@ -37,7 +39,16 @@ import { FooterSocialComponent } from './components/footer/footer-social/footer-
   ],
   imports: [
     SharedModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
+  ],
+  providers: [ServerShopService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (serverShopService : ServerShopService ) => () => serverShopService.getCategories(),
+      deps: [ServerShopService ],
+      multi: true,
+    },
   ],
 })
 export class CoreModule { }
