@@ -15,6 +15,8 @@ import { FooterContactsComponent } from './components/footer/footer-contacts/foo
 import { FooterSocialComponent } from './components/footer/footer-social/footer-social.component';
 import {ServerShopService} from './services/server-shop.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UndefinedPageComponent } from './pages/undefined-page/undefined-page.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
 
 
 
@@ -31,11 +33,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     LoginBtnComponent,
     BasketBtnComponent,
     FooterContactsComponent,
-    FooterSocialComponent
+    FooterSocialComponent,
+    UndefinedPageComponent,
+    MainPageComponent
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    UndefinedPageComponent
   ],
   imports: [
     SharedModule,
