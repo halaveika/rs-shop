@@ -3,6 +3,9 @@ import { IAppState } from '@redux/state/app.state';
 import { ICategoriesState } from '@redux/state/categoryes.state';
 import { ICategoryResponse } from '@shared/models/icategory-response';
 import {ISubCategory} from '@shared/models/isubcategory';
+import {selectRouteParams, selectCurrentRoute} from '@redux/selectors/router.selectors';
+import {CATEGORY, SUBCATEGORY} from '@shared/constansts'
+import {searchCategorySubcategoryIndex} from '@shared/helper'
 
 const selectCategories = (state: IAppState) => state.categories;
 
@@ -16,13 +19,12 @@ export const selectSubCategoriesArr = createSelector(
   (state: ICategoryResponse[] ) => state.reduce<ISubCategory[]>((subArray, category) => {return subArray.concat(category.subCategories);}, [])
 );
 
-export const checkCategory = (id: string) => createSelector(
+export const selectCategoryData = () => createSelector(
+  selectRouteParams,
+  selectCurrentRoute,
   selectCategoriesArr,
-  selectSubCategoriesArr ,
-  (categories, subCategories ) => {
-    const a = categories.findIndex(category => category.id === id);
-    const b = subCategories.findIndex(subcategory => subcategory.id === id);
-    console.log('' + a + ', '+ b);
-    if (a === -1 && b === -1) { return false};
-    return true;
+  ({id}, route, categories) => {;
+    if(!id) {return {category: '', categoryIndex: '', subcategory: '', subcategoryIndex: '', route: route.routeConfig.path}};
+    console.log('selectCategoryData', id);
+    return searchCategorySubcategoryIndex(categories, id);
   });

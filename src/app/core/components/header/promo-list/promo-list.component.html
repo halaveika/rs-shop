@@ -1,6 +1,6 @@
 
 <div class="btn-group d-flex" role="group" aria-label="Basic outlined example">
-  <a *ngFor="let category of CategoriesArr$ | async"  [routerLink]="['/',category.id]">
+  <a *ngFor="let category of CategoriesArr$ | async"  [routerLink]="['category',category.id]">
     <button type="button" class="btn btn-outline-light">{{category.name}}</button>
   </a>
 </div>

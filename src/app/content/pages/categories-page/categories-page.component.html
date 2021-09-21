@@ -1,1 +1,23 @@
-<p>categories-page works!</p>
+<div class="container-xl d-flex m-x-auto">
+  <ul *ngIf="renderCategories; else subcategories" class="list-group">
+    <li *ngFor="let list of pushDataForCategories!.subCategories"
+    [routerLink]="['/category', list.id]"
+    class="list-group-item list-group-item-primary category-item">{{list.name}}</li>
+  </ul>
+
+
+  <ng-template #subcategories>subcategory</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
