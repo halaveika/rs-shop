@@ -1,6 +1,21 @@
 
 <img class="logo" src="./../../../../../assets/icons/logo.png" alt="logo" (click)="navigateHome()">
-<button type="button" class="nav-btn"><div class="nav-btn_item"></div><span>Каталог товаров</span></button>
+<div class="dropdown">
+  <button class="btn btn-outline-primary dropdown-toggle catalog-btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><div class="nav-btn_item"  id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"></div><span>Каталог товаров</span>
+  </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <li *ngFor="let category of categoriesArr$ | async;" class="dropdown-submenu">
+          <a [routerLink]="['/category/', category.id]" href="#" data-bs-toggle="dropdown" class="dropdown-item dropdown-toggle">{{category.name}}</a>
+          <ul  class="dropdown-menu">
+              <li *ngFor="let subcategory of category.subCategories;">
+                  <a [routerLink]="['/category/', subcategory.id]" href="#" class="dropdown-item">{{subcategory.name}}</a>
+              </li>
+          </ul>
+      </li>
+  </ul>
+</div>
 <app-search></app-search>
 <app-login-btn></app-login-btn>
 <app-basket-btn></app-basket-btn>
+
+

@@ -19,11 +19,9 @@ export class MainPageComponent {
   public bottomCarouselArr: IGoods[][] = [];
   constructor(private store: Store<IAppState>, private serverShopService: ServerShopService) {
     this.categoriesArr$.subscribe(response=> this.serverShopService.getPopular(response).subscribe(goods=>{
-      console.dir(goods);
       this.ratingArr = goods;
       goods.reduce((accum:IGoods[],value:IGoods,index)=>{
         if (!((index + 1) % 7)){ this.bottomCarouselArr.push(accum); return accum = [];} return accum=accum.concat(value)},[])
-        console.dir(this.bottomCarouselArr);
     }))
   }
 
