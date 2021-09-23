@@ -1,11 +1,12 @@
-import { Component, OnInit,  Input  } from '@angular/core';
+import { Component, Input  } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-goods-card',
   templateUrl: './goods-card.component.html',
   styleUrls: ['./goods-card.component.scss']
 })
-export class GoodsCardComponent implements OnInit {
+export class GoodsCardComponent{
   @Input() public name = '';
 
   @Input() public imageUrls:string[]= [];
@@ -27,7 +28,5 @@ export class GoodsCardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }

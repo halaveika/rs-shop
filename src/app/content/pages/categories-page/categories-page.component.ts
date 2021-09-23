@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { selectCategoryData } from '@app/redux/selectors/categories.selector';
 import { select, Store } from '@ngrx/store';
 import { IAppState } from '@redux/state/app.state';
@@ -21,7 +21,7 @@ import {selectDisplayCategory} from '@redux/selectors/displayData.selector';
   styleUrls: ['./categories-page.component.scss']
 })
 
-export class CategoriesPageComponent {
+export class CategoriesPageComponent implements OnDestroy{
   public categoryData$: Observable<IRenderrProps> =this.store.pipe(select(selectCategoryData()));
   public categorySub : Subscription;
   public pushDataForCategories:ICategoryResponse | null = null;
@@ -36,33 +36,25 @@ export class CategoriesPageComponent {
   };
 
   constructor(private store: Store<IAppState>, private router: Router, private renderService: RenderService ) {
-
     this.categorySub = this.categoryData$.pipe(takeUntil(this.destroy$)).subscribe(props => {
       if (!props.category && !props.subcategory) {
         this.destroy$.next(true);
         if (props.route! ==='main') {this.router.navigate(['main'])}
-          else {this.router.navigate(['../404']);}
+          else if(props.route!.slice(0,5) ==='goods') {this.router.navigate(['category/goods',props.route!.slice(6)])}
+            else {this.router.navigate(['../404']);}
           return;
       } else if (props.category && !props.subcategory ) {
         this.renderCategories= true;
         this.pushDataForCategories = this.renderService.renderCategory(props)}
             else {this.renderCategories= false;
               this.setGoodsHttpParams();
-              console.log('this.renderService.renderSubcategory');
                this.renderService.renderSubcategory(props,this.goodsHttpParams);
             }
 
   })
 
 }
-  // OnChanges(){
-  //   console.log('Onchange');
-  //   this.store.pipe(select(selectDisplayCategory)).subscribe((data) => this.pushDataForSubcategories =
-  //   data);
-  // }
-
-
-  getMoreGoods() {
+   getMoreGoods() {
     this.goodsHttpParams.count += 10;
     const sub = this.store.pipe(select(selectDisplayCategory)).subscribe((data)=>this.renderService.renderSubcategory(data,this.goodsHttpParams));
     sub.unsubscribe();

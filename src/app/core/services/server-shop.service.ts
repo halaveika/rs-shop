@@ -41,8 +41,6 @@ export class ServerShopService {
       .set('count', goodsHttpParams.count)
       .set('sortBy', goodsHttpParams.sortBy)
       .set('reverse', goodsHttpParams.reverse);
-    console.log('ServerShopService getGoods');
-    console.log(category,subcategory);
     return this.http.get<IGoods[]>(`${SERVER_PATH}goods/category/${category}/${subcategory}`,{params})
       .pipe(
         tap((goods) => this.store.dispatch(new SetDisplayGoods({category, subcategory, goods}))),
@@ -52,4 +50,17 @@ export class ServerShopService {
         }),
       );
   }
+
+  getGoodsById(id:string):Observable<IGoods> {
+
+  console.log(id);
+  return this.http.get<IGoods>(`${SERVER_PATH}goods/item/${id}`)
+    .pipe(
+      catchError((error) => {
+        throwError(error);
+        return [];
+      }),
+    );
+}
+
 }
