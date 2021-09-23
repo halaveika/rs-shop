@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-basket-btn',
   templateUrl: './basket-btn.component.html',
   styleUrls: ['./basket-btn.component.scss']
 })
-export class BasketBtnComponent implements OnInit {
+export class BasketBtnComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { selectCategoriesArr } from '@app/redux/selectors/categories.selector';
 import { IAppState } from '@app/redux/state/app.state';
 import { ICategoryResponse } from '@app/shared/models/icategory-response';
@@ -10,12 +10,9 @@ import { Observable } from 'rxjs';
   templateUrl: './promo-list.component.html',
   styleUrls: ['./promo-list.component.scss']
 })
-export class PromoListComponent implements OnInit {
+export class PromoListComponent {
   public CategoriesArr$: Observable<ICategoryResponse[]>  = this.store.pipe(select(selectCategoriesArr));
   constructor(private store: Store<IAppState>) { }
 
-  ngOnInit(): void {
-
-  }
 
 }

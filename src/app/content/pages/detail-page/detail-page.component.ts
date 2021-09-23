@@ -7,7 +7,7 @@ import {ServerShopService} from '@core/services/server-shop.service'
   templateUrl: './detail-page.component.html',
   styleUrls: ['./detail-page.component.scss']
 })
-export class DetailPageComponent{
+export class DetailPageComponent implements OnInit{
   public name = '';
 
   public imageUrls:string[]= [];
