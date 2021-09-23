@@ -12,5 +12,6 @@ export function searchCategorySubcategoryIndex (categories:ICategoryResponse[], 
       result.categoryIndex = `${index}`;
     }
   return true});
+  console.dir(result);
   return result;
 }

@@ -1,3 +1,4 @@
+
 export interface IGoods {
   id: string,
   name: string,
@@ -5,5 +6,7 @@ export interface IGoods {
   vailableAmount: number,
   price: number,
   rating: number,
-  description: string
+  description: string,
+  isInCart:	boolean,
+  isFavorite:	boolean
 }

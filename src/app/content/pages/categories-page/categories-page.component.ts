@@ -11,6 +11,9 @@ import {IRenderrProps} from '@shared/models/IRenderProps';
 import { RenderService } from '@app/core/services/render.service';
 import { CleanDisplay } from '@app/redux/actions/displayData.action';
 import { takeUntil } from 'rxjs/operators';
+import {IDisplayDataState} from '@redux/state/displayData.state'
+import { IGoodsParam } from '@app/shared/models/IGoodsParam';
+import {selectDisplayCategory} from '@redux/selectors/displayData.selector';
 
 @Component({
   selector: 'app-categories-page',
@@ -22,41 +25,79 @@ export class CategoriesPageComponent {
   public categoryData$: Observable<IRenderrProps> =this.store.pipe(select(selectCategoryData()));
   public categorySub : Subscription;
   public pushDataForCategories:ICategoryResponse | null = null;
-  public pushDataForSubcategories: ISubCategory | null = null;
+  public pushDataForSubcategories: Observable<IDisplayDataState | null> = this.store.pipe(select(selectDisplayCategory))
   public renderCategories: boolean = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  public goodsHttpParams:  IGoodsParam = {
+    start: 0,
+    count: 10,
+    sortBy: 'rating',
+    reverse: false,
+  };
 
   constructor(private store: Store<IAppState>, private router: Router, private renderService: RenderService ) {
-    if (!this.router.url.includes('category')) {
-      console.log(this.router.url);
-      this.destroy$.next(true)};
 
     this.categorySub = this.categoryData$.pipe(takeUntil(this.destroy$)).subscribe(props => {
-      console.log('CategoriesPageComponent');
       if (!props.category && !props.subcategory) {
-        console.log('CategoriesPageComponent if 404');
-        console.dir(props);
         this.destroy$.next(true);
         if (props.route! ==='main') {this.router.navigate(['main'])}
-        else {this.router.navigate(['../404']);}
-        return;
+          else {this.router.navigate(['../404']);}
+          return;
       } else if (props.category && !props.subcategory ) {
         this.renderCategories= true;
-        console.log('CategoriesPageComponent if category');
-        this.pushDataForCategories = this.renderService.renerCategory(props)}
-            else {this.renderCategories= false;}
-            //   this.pushDataForSubcategories = data.data as  ISubCategory}
+        this.pushDataForCategories = this.renderService.renderCategory(props)}
+            else {this.renderCategories= false;
+              this.setGoodsHttpParams();
+              console.log('this.renderService.renderSubcategory');
+               this.renderService.renderSubcategory(props,this.goodsHttpParams);
+            }
+
   })
 
 }
+  // OnChanges(){
+  //   console.log('Onchange');
+  //   this.store.pipe(select(selectDisplayCategory)).subscribe((data) => this.pushDataForSubcategories =
+  //   data);
+  // }
+
+
+  getMoreGoods() {
+    this.goodsHttpParams.count += 10;
+    const sub = this.store.pipe(select(selectDisplayCategory)).subscribe((data)=>this.renderService.renderSubcategory(data,this.goodsHttpParams));
+    sub.unsubscribe();
+  }
+
+  sortByRait() {
+    this.goodsHttpParams.sortBy = 'rating';
+    this.goodsHttpParams.reverse = !this.goodsHttpParams.reverse ;
+    const sub = this.store.pipe(select(selectDisplayCategory)).subscribe((data)=>this.renderService.renderSubcategory(data,this.goodsHttpParams));
+    sub.unsubscribe();
+  }
+
+  sortByPrice() {
+    this.goodsHttpParams.sortBy = 'price';
+    this.goodsHttpParams.reverse = !this.goodsHttpParams.reverse ;
+    const sub = this.store.pipe(select(selectDisplayCategory)).subscribe((data)=>this.renderService.renderSubcategory(data,this.goodsHttpParams));
+    sub.unsubscribe();
+
+  }
+
+  setGoodsHttpParams() {
+    this.goodsHttpParams = {
+      start: 0,
+      count: 10,
+      sortBy: 'rating',
+      reverse: false,
+    };
+  }
+
 
   ngOnDestroy(): void {
-    console.log('Destroy category-page');
-    // this.categorySub.unsubscribe();
-
-
     this.destroy$.unsubscribe();
     this.store.dispatch(new CleanDisplay());
   }
+
+
 
 }
