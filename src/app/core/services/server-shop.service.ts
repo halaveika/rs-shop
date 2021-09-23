@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ICategoryResponse } from '@shared/models/icategory-response';
 import { IGoods } from '@shared/models/IGoods';
-import { SERVER_PATH_GET_CATEGORIES, SERVER_PATH } from '@shared/constansts';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { SERVER_PATH_GET_CATEGORIES, SERVER_PATH, CATEGORY, SUBCATEGORY } from '@shared/constansts';
+import { Observable, throwError, from} from 'rxjs';
+import { catchError, tap, map, mergeMap,scan,concatMap, reduce} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { GetCategories } from '@app/redux/actions/categories.action';
 import { SetDisplayGoods} from '@app/redux/actions/displayData.action';
@@ -29,13 +29,7 @@ export class ServerShopService {
   }
 
 
-    getGoods(category: string, subcategory: string,goodsHttpParams:IGoodsParam):Observable<IGoods[]> {
-      const x:  IGoodsParam = {
-        start: 0,
-        count: 10,
-        sortBy: 'rating',
-        reverse: false,
-      };
+  getGoods(category: string, subcategory: string,goodsHttpParams:IGoodsParam):Observable<IGoods[]> {
     const params = new HttpParams()
       .set('start', goodsHttpParams.start)
       .set('count', goodsHttpParams.count)
@@ -62,5 +56,27 @@ export class ServerShopService {
       }),
     );
 }
+
+
+  getPopular(data:ICategoryResponse[]):Observable<IGoods[]>{
+    const reqArr:{category:string,subcategory:string}[] = [];
+    const result:IGoods[] = [];
+    const params = new HttpParams()
+      .set('start', 0)
+      .set('count', 1)
+      .set('sortBy', 'rating')
+      .set('reverse', true);
+    data.forEach(category=>category.subCategories.forEach(subcategory=>reqArr.push({category: category.id,subcategory:subcategory.id})));
+    return (from(reqArr).pipe(
+      mergeMap(req =>
+      this.http.get<IGoods[]>(`${SERVER_PATH}goods/category/${req.category}/${req.subcategory}`,{params})),
+      reduce((arr,value)=>arr.concat(value)),
+      ));
+
+  }
+
+
+
+
 
 }

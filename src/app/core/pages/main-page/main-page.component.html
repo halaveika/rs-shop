@@ -1,1 +1,50 @@
-<p>main-page works!</p>
+<div class="container-xl d-flex flex-column flex-wrap m-x-auto p-3">
+  <div id="carouselExampleInterval" class="carousel slide main-carousel" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let slide of ratingArr; let isFirst = first"  [class.active]="isFirst" class="carousel-item main-carousel-slide" data-bs-interval="5000" [routerLink]="['/category/goods', slide.id]">
+        <img [src]="slide.imageUrls[0]" class="d-block w-100 main-img" alt="rating-goods">
+        <div class="carousel-description-container">
+          <span class="badge bg-primary text-wrap main-carousel-name">{{slide.name}}</span>
+          <span class="badge bg-warning text-wrap main-carousel-carprice">{{slide.price}} рублей</span>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+  <div id="carouselExampleFade" class="carousel slide carousel-fade carousel-bootom" data-bs-ride="carousel">
+    <div class="carousel-inner carousel-bottom-wrapper">
+      <div *ngFor="let slide of bottomCarouselArr; let isFirst = first"  [class.active]="isFirst" class="carousel-item active carousel-bottom-item">
+        <div class="bottom-carousel-container">
+          <div *ngFor="let item of slide;" class="carousel-bottom-img-wrapper">
+            <img [src]="item.imageUrls[0]" class="carousel-bottom-img" alt="goods">
+            <div class="d-flex flex-column carousel-bottom-description">
+              <span class="badge bg-primary text-wrap bottom-carousel-name">{{item.name}}</span>
+              <span class="badge bg-warning text-wrap bottom-carousel-carprice">{{item.price}} рублей</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+
+
+
+</div>
