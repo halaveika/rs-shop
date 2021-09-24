@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { appReducer } from '@redux/reducers/app.reducer';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -20,12 +21,12 @@ import { appReducer } from '@redux/reducers/app.reducer';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BrowserModule,
     CoreModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

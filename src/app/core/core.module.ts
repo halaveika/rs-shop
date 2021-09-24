@@ -18,6 +18,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UndefinedPageComponent } from './pages/undefined-page/undefined-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import {RenderService} from './services/render.service';
+import {AuthInterceptor} from '@core/auth-interceptor';
+import {UserService} from '@core/services/user.service';
 
 
 
@@ -50,12 +52,25 @@ import {RenderService} from './services/render.service';
   ],
   providers: [ServerShopService,
     RenderService,
+    UserService,
     {
       provide: APP_INITIALIZER,
       useFactory: (serverShopService : ServerShopService ) => () => serverShopService.getCategories(),
       deps: [ServerShopService ],
       multi: true,
     },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (userService: UserService) => () => userService.removeToken(),
+      deps: [UserService],
+      multi: true,
+    },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }
   ],
 })
 export class CoreModule { }
+

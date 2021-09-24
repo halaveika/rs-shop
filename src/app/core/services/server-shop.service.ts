@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ICategoryResponse } from '@shared/models/icategory-response';
 import { IGoods } from '@shared/models/IGoods';
-import { SERVER_PATH_GET_CATEGORIES, SERVER_PATH, CATEGORY, SUBCATEGORY } from '@shared/constansts';
+import { SERVER_PATH_GET_CATEGORIES, SERVER_PATH, TOKEN } from '@shared/constansts';
 import { Observable, throwError, from} from 'rxjs';
 import { catchError, tap, map, mergeMap,scan,concatMap, reduce} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { GetCategories } from '@app/redux/actions/categories.action';
 import { SetDisplayGoods} from '@app/redux/actions/displayData.action';
 import { IGoodsParam } from '@app/shared/models/IGoodsParam';
+import { IUserState } from '@app/redux/state/user.state copy';
+import { AddToCart, AddToFavorite, GetUserInfo } from '@app/redux/actions/user.action';
+
 
 @Injectable()
 export class ServerShopService {
@@ -46,8 +49,6 @@ export class ServerShopService {
   }
 
   getGoodsById(id:string):Observable<IGoods> {
-
-  console.log(id);
   return this.http.get<IGoods>(`${SERVER_PATH}goods/item/${id}`)
     .pipe(
       catchError((error) => {
@@ -75,7 +76,49 @@ export class ServerShopService {
 
   }
 
+  signin(login:string, password: string):Observable<{token:string}>{
+    return this.http.post<{token:string}>(`${SERVER_PATH}users/login`,{login,password})
+    .pipe(
+      tap((token) => localStorage.setItem(TOKEN,token.token)),
+      catchError((error) => {
+        throwError(error);
+        return [];
+      }),
+      );
+  }
 
+  getUserInfo():Observable<IUserState>{
+    return this.http.get<IUserState>(`${SERVER_PATH}users/userInfo`)
+    .pipe(
+      tap((userInfo) => this.store.dispatch(new GetUserInfo(userInfo))),
+      catchError((error) => {
+        throwError(error);
+        return [];
+      }),
+      );
+  }
+
+  addToFavorites(id:string):Observable<string>{
+    return this.http.put<string>(`${SERVER_PATH}users/favorites`,{id})
+    .pipe(
+      tap((id) => this.store.dispatch(new AddToFavorite(id))),
+      catchError((error) => {
+        throwError(error);
+        return '';
+      }),
+      );
+  }
+
+  addToCart(id:string):Observable<string>{
+    return this.http.put<string>(`${SERVER_PATH}users/cart`,{id})
+    .pipe(
+      tap((id) => this.store.dispatch(new AddToCart(id))),
+      catchError((error) => {
+        throwError(error);
+        return '';
+      }),
+      );
+  }
 
 
 

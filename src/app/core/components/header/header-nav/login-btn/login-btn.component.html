@@ -10,12 +10,12 @@
         Войти
       </button>
     </li>
-    <li class="m-2 contact-item">
+    <li class="m-2 contact-item" (click)="linkToCart()">
       <img class="m-1" src="../../../../../../assets/icons/bascet.svg" alt="bascet">
       <span >Корзина</span>
       <span class="counter">99</span>
     </li>
-    <li class="m-2 contact-item">
+    <li class="m-2 contact-item" (click)="linkToFavorite()">
       <img class="m-1" src="../../../../../../assets/icons/favorites.svg" alt="favotires">
       <span >Избранные товары</span>
       <span class="counter">99</span>
@@ -37,17 +37,17 @@
       </div>
       <div class="modal-body">
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Электронная почта</label>
+          <input [(ngModel)]="loginValue" type="text" class="form-control" id="floatingInput" placeholder="Логин">
+          <label for="floatingInput">Логин</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Пароль">
+          <input [(ngModel)]="passwordValue" type="password" class="form-control" id="floatingPassword" placeholder="Пароль">
           <label for="floatingPassword">Пароль</label>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-primary">Войти</button>
+        <button type="button" class="btn btn-primary" (click)="login()">Войти</button>
       </div>
     </div>
   </div>

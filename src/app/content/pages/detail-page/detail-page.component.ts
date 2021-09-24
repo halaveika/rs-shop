@@ -37,7 +37,6 @@ export class DetailPageComponent implements OnInit{
     this.serverShopService.getGoodsById(this.id).subscribe((item) => {
       this.name = item.name;
       this.imageUrls = item.imageUrls;
-      console.dir(this.imageUrls);
       this.vailableAmount = item.vailableAmount;
       this.price = item.price;
       this.rating = item.rating;
@@ -46,5 +45,13 @@ export class DetailPageComponent implements OnInit{
       this.isFavorite = item.isFavorite;
       return true;
     });
+  }
+
+  addToFavorites(){
+    this.serverShopService.addToFavorites(this.id).subscribe();
+  }
+
+  addToCart(){
+    this.serverShopService.addToCart(this.id).subscribe();
   }
 }

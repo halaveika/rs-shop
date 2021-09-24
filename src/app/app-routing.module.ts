@@ -8,7 +8,8 @@ import {UndefinedPageComponent} from '@core/pages/undefined-page/undefined-page.
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainPageComponent },
-  { path: 'login', loadChildren: () => import('@auth/auth.module').then((m) => m.AuthModule) },
+  { path: 'order', loadChildren: () => import('@order/order.module').then((m) => m.OrderModule) },
+  { path: 'favorite', loadChildren: () => import('@favorite/favorite.module').then((m) => m.FavoriteModule) },
   {
     path: 'category',
     loadChildren: () => import('@content/content.module')

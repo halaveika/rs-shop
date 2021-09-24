@@ -7,6 +7,8 @@
       "@app/*": ["app/*"],
       "@auth/*": ["app/auth/*"],
       "@core/*": ["app/core/*"],
+      "@order/*": ["app/order/*"],
+      "@favorite/*": ["app/favorite/*"],
       "@content/*": ["app/content/*"],
       "@shared/*": ["app/shared/*"],
       "@redux/*": ["app/redux/*"],

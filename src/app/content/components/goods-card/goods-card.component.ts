@@ -1,5 +1,6 @@
 import { Component, Input  } from '@angular/core';
 import {Router} from '@angular/router';
+import {ServerShopService} from '@core/services/server-shop.service'
 
 @Component({
   selector: 'app-goods-card',
@@ -26,7 +27,9 @@ export class GoodsCardComponent{
   @Input() public isFavorite = false;
 
 
-  constructor() { }
+  constructor(private serverShopService: ServerShopService) { }
 
-
+  addToCart(){
+    this.serverShopService.addToCart(this.id).subscribe();
+  }
 }

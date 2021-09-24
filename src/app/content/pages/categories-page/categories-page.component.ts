@@ -3,8 +3,7 @@ import { selectCategoryData } from '@app/redux/selectors/categories.selector';
 import { select, Store } from '@ngrx/store';
 import { IAppState } from '@redux/state/app.state';
 import { Observable, Subscription, Subject} from 'rxjs';
-import { ActivatedRoute, Router} from '@angular/router';
-import { ISubCategory} from '@shared/models/isubcategory';
+import {Router} from '@angular/router';
 import {ICategoryResponse} from '@shared/models/icategory-response';
 import {CATEGORY, SUBCATEGORY} from '@shared/constansts'
 import {IRenderrProps} from '@shared/models/IRenderProps';

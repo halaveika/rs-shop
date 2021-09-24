@@ -7,7 +7,7 @@
     <div class="rait-container" >
       <div class="star-img" *ngFor="let stars of [].constructor(rating)"></div>
     </div>
-    <button type="button" class="btn btn-primary">В корзину</button>
+    <button type="button" class="btn btn-primary" (click)="addToCart()">В корзину</button>
   </div>
 </div>
 
