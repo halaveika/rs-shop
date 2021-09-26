@@ -13,23 +13,23 @@
     <li class="m-2 contact-item" (click)="linkToCart()">
       <img class="m-1" src="../../../../../../assets/icons/bascet.svg" alt="bascet">
       <span >Корзина</span>
-      <span class="counter">99</span>
+      <span class="counter">{{(cartArr$ | async)!.length}}</span>
     </li>
     <li class="m-2 contact-item" (click)="linkToFavorite()">
       <img class="m-1" src="../../../../../../assets/icons/favorites.svg" alt="favotires">
       <span >Избранные товары</span>
-      <span class="counter">99</span>
+      <span class="counter">{{(favoritesArr$ | async)!.length}}</span>
     </li>
     <li class="m-2 contact-item" (click)="linkToListOrder()">
       <img class="m-1" src="../../../../../../assets/icons/view.svg" alt="view">
       <span>Лист ожидания</span>
-      <span class="counter">99</span>
+      <span class="counter">{{(ordersArr$ | async)!.length}}</span>
     </li>
   </ul>
 </button>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="!isRegister; else registration" class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title login-title" id="exampleModalLabel">Вход</h5>
@@ -46,9 +46,44 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-link" (click)="registrationShow()">регистрация</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
         <button type="button" class="btn btn-primary" (click)="login()">Войти</button>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #registration>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title login-title" id="exampleModal2Label">Вход</h5>
+          <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="firstName" type="text" class="form-control" id="floatingFirstName" placeholder="Имя">
+            <label for="floatingFirstName">Имя</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="lastName" type="text" class="form-control" id="floatingLastName" placeholder="Фамилия">
+            <label for="floatingLastName">Фамилия</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="loginValue" type="text" class="form-control" id="floatingLogin" placeholder="Логин">
+            <label for="floatingLogin">Логин</label>
+          </div>
+          <div class="form-floating">
+            <input [(ngModel)]="passwordValue" type="password" class="form-control" id="floatingPassword" placeholder="Пароль">
+            <label for="floatingPassword">Пароль</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link" (click)="registrationShow()">вход</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          <button type="button" class="btn btn-primary" (click)="registr()">Регистрация</button>
+        </div>
+      </div>
+    </div>
+</ng-template>

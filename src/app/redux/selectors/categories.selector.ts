@@ -24,9 +24,10 @@ export const selectCategoryData = () => createSelector(
   selectCurrentRoute,
   selectCategoriesArr,
   ({id}, route, categories) => {;
-    console.dir(route);
-    if(id && route.routeConfig.path.slice(0,5) ==='goods') {return {category: '', categoryIndex: '', subcategory: '', subcategoryIndex: '', route: 'goods/' + id}};
+    if(id && route.routeConfig.path.includes('goods')) {return {category: '', categoryIndex: '', subcategory: '', subcategoryIndex: '', route: 'goods/' + id}};
+    if(id && route.routeConfig.path.includes('order')) {return {category: '', categoryIndex: '', subcategory: '', subcategoryIndex: '', route: 'order/' + id}};
+    if(id && route.routeConfig.path.includes('listorder')) {return {category: '', categoryIndex: '', subcategory: '', subcategoryIndex: '', route: 'listorder/' + id}};
+    if(id && route.routeConfig.path.includes('favorite')) {return {category: '', categoryIndex: '', subcategory: '', subcategoryIndex: '', route: 'favorite/' + id}};
     if(!id) {return {category: '', categoryIndex: '', subcategory: '', subcategoryIndex: '', route: route.routeConfig.path}};
-    console.log('selectCategoryData', id);
     return searchCategorySubcategoryIndex(categories, id);
   });

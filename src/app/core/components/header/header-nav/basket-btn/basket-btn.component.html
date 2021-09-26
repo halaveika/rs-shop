@@ -2,7 +2,7 @@
   <img class="d-block m-1" src="../../../../../../assets/icons/bascet.svg" alt="bascet">
   <span>Корзина</span>
   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    99+
+    {{(cartArr$ | async)!.length}}
     <span class="visually-hidden">unread messages</span>
   </span>
 </button>

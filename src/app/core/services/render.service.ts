@@ -31,14 +31,12 @@ this.Goods = data.goods)});
 
 
   renderCategory(renderProps:IRenderrProps):ICategoryResponse {
-    console.log('renderService Category');
     this.store.dispatch(new SetDisplayCategory(renderProps.category));
     const result = this.CategoriesArr.find(category => category.id === renderProps.category) as ICategoryResponse;
     return result;
   }
 
   renderSubcategory(renderProps:IRenderrProps,goodsHttpParams: IGoodsParam):IDisplayDataState {
-    console.log('renderService SubCategory');
     this.serverShopService.getGoods(renderProps.category,renderProps.subcategory,goodsHttpParams).subscribe();
     return {category: renderProps.category, subcategory: renderProps.subcategory , goods: this.Goods}
   }

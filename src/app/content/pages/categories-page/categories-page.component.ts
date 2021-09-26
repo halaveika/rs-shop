@@ -38,9 +38,12 @@ export class CategoriesPageComponent implements OnDestroy{
     this.categorySub = this.categoryData$.pipe(takeUntil(this.destroy$)).subscribe(props => {
       if (!props.category && !props.subcategory) {
         this.destroy$.next(true);
-        if (props.route! ==='main') {this.router.navigate(['main'])}
-          else if(props.route!.slice(0,5) ==='goods') {this.router.navigate(['category/goods',props.route!.slice(6)])}
-            else {this.router.navigate(['../404']);}
+        if (props.route && props.route! ==='main') {this.router.navigate(['main'])}
+          else if(props.route! && props.route!.includes('goods')) {this.router.navigate(['category/goods',props.route!.slice(6)])}
+            else if(props.route! && props.route!.includes('order')) {this.router.navigate(['order',props.route!.slice(6)])}
+              else if(props.route! && props.route!.includes('listorder')) {this.router.navigate(['listorder',props.route!.slice(10)])}
+                else if(props.route! && props.route!.includes('favorite')) {this.router.navigate(['favorite',props.route!.slice(9)])}
+
           return;
       } else if (props.category && !props.subcategory ) {
         this.renderCategories= true;

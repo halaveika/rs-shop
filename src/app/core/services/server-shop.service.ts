@@ -12,6 +12,7 @@ import { IGoodsParam } from '@app/shared/models/IGoodsParam';
 import { IUserState } from '@app/redux/state/user.state copy';
 import { AddToCart, AddToFavorite, GetUserInfo } from '@app/redux/actions/user.action';
 import {IOrder, IOrdersItems} from '@shared/models/IUserInfo';
+import { IUser } from '@shared/models/IUser';
 
 
 @Injectable()
@@ -86,6 +87,17 @@ getGoodsByIdMany(ids:string[]):Observable<IGoods[]> {
 
   signin(login:string, password: string):Observable<{token:string}>{
     return this.http.post<{token:string}>(`${SERVER_PATH}users/login`,{login,password})
+    .pipe(
+      tap((token) => localStorage.setItem(TOKEN,token.token)),
+      catchError((error) => {
+        throwError(error);
+        return [];
+      }),
+      );
+  }
+
+  registration(user:IUser):Observable<{token:string}>{
+    return this.http.post<{token:string}>(`${SERVER_PATH}users/register`,{user})
     .pipe(
       tap((token) => localStorage.setItem(TOKEN,token.token)),
       catchError((error) => {
