@@ -4,15 +4,16 @@ import { ICategoryResponse } from '@shared/models/icategory-response';
 import { IGoods } from '@shared/models/IGoods';
 import { SERVER_PATH_GET_CATEGORIES, SERVER_PATH, TOKEN } from '@shared/constansts';
 import { Observable, throwError, from} from 'rxjs';
-import { catchError, tap, map, mergeMap,scan,concatMap, reduce, switchMap} from 'rxjs/operators';
+import { catchError, tap,mergeMap, reduce} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { GetCategories } from '@app/redux/actions/categories.action';
 import { SetDisplayGoods} from '@app/redux/actions/displayData.action';
 import { IGoodsParam } from '@app/shared/models/IGoodsParam';
 import { IUserState } from '@app/redux/state/user.state copy';
-import { AddToCart, AddToFavorite, GetUserInfo } from '@app/redux/actions/user.action';
-import {IOrder, IOrdersItems} from '@shared/models/IUserInfo';
+import { GetUserInfo } from '@app/redux/actions/user.action';
+import {IOrder} from '@shared/models/IUserInfo';
 import { IUser } from '@shared/models/IUser';
+import {ISearchResponse} from '@shared/models/ISearchResponse';
 
 
 @Injectable()
@@ -61,7 +62,6 @@ export class ServerShopService {
 }
 
 getGoodsByIdMany(ids:string[]):Observable<IGoods[]> {
-  console.dir(ids);
   return from(ids).pipe(
     mergeMap(id => this.http.get<IGoods[]>(`${SERVER_PATH}goods/item/${id}`)),
     reduce((acc:IGoods[], curr) => acc.concat(curr), [])
@@ -143,7 +143,6 @@ getGoodsByIdMany(ids:string[]):Observable<IGoods[]> {
   }
 
   addToCart(id:string):Observable<IUserState>{
-    console.dir(id);
     return this.http.post(`${SERVER_PATH}users/cart`,{id})
     .pipe(
       mergeMap((responses):Observable<IUserState> => this.getUserInfo()),
@@ -176,6 +175,18 @@ getGoodsByIdMany(ids:string[]):Observable<IGoods[]> {
         throwError(error);
         return [];
       }),
+      );
+  }
+
+  searchGoods(searchQuery: string):Observable<ISearchResponse[]> {
+    const params = new HttpParams()
+      .set('text', searchQuery)
+    return this.http.get<ISearchResponse[]>(`${SERVER_PATH}goods/search`,{params})
+      .pipe(
+        catchError((error) => {
+          throwError(error);
+          return [];
+        }),
       );
   }
 

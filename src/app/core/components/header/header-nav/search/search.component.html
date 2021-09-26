@@ -1,6 +1,11 @@
-<div class="input-group">
-  <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary" type="button">Поиск</button>
-  </div>
-  <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+<div class="input-group" (click)="hideSearch()">
+  <input type="text" class="form-control search-form " placeholder="поиск" aria-label="" aria-describedby="basic-addon1" [formControl]="textControl">
+  <ul class="list-group search-result-container">
+    <li   *ngFor="let item of searchResult | slice:0:1; let i=index" class="list-group-item" [routerLink]="['/category', item.category]">{{item.category}}</li>
+    <li *ngFor="let item of searchResult | slice:0:1; let i=index" class="list-group-item" [routerLink]="['/category', item.subCategory]">{{item.subCategory}}</li>
+    <li *ngFor="let item of searchResult | slice:0:5; let i=index" class="list-group-item" [routerLink]="['/category/goods', item.id]">
+      <img class="search-image" [src]="item.imageUrls[0]">
+      {{item.name}}</li>
+  </ul>
 </div>
+

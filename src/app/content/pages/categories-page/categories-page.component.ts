@@ -5,7 +5,6 @@ import { IAppState } from '@redux/state/app.state';
 import { Observable, Subscription, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {ICategoryResponse} from '@shared/models/icategory-response';
-import {CATEGORY, SUBCATEGORY} from '@shared/constansts'
 import {IRenderrProps} from '@shared/models/IRenderProps';
 import { RenderService } from '@app/core/services/render.service';
 import { CleanDisplay } from '@app/redux/actions/displayData.action';

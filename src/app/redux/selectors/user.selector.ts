@@ -1,4 +1,4 @@
-import { createSelector, select } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { IAppState } from '@redux/state/app.state';
 
 

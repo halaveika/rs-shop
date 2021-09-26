@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { selectCategoriesArr } from '@app/redux/selectors/categories.selector';
 import { IAppState } from '@app/redux/state/app.state';
 import { ICategoryResponse } from '@app/shared/models/icategory-response';

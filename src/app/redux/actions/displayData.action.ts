@@ -1,6 +1,4 @@
 import { Action } from '@ngrx/store';
-import { ICategoryResponse } from '@shared/models/icategory-response';
-import { ISubCategory } from "@shared/models/isubcategory";
 import {IDisplayDataState} from '@redux/state/displayData.state'
 
 export enum EDisplayDataActions {

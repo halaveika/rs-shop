@@ -1,0 +1,29 @@
+:host{
+width: 300px;
+ & li {
+   cursor: pointer;
+
+ }
+}
+
+.search-form {
+z-index: 100;
+width: 100%;
+}
+
+
+.search-result-container{
+  z-index: 20;
+  position: absolute;
+  top: 45px;
+  left: 0px;
+}
+
+.search-image{
+  width: 50px;
+  height: 20px;
+}
+
+.hidden{
+  display: none;
+}

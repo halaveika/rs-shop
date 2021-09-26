@@ -1,2 +1,5 @@
 <img class="m-1" src="./../../../../../../assets/icons/location.svg" alt="location">
-<span >City</span>
+<select class="form-select form-select text-primary" aria-label="Default select example">
+  <option selected>{{city}}</option>
+  <option *ngFor="let item of cities; index as j" value='j'>{{item}}</option>
+</select>

@@ -4,7 +4,6 @@ import { ICategoriesState } from '@redux/state/categoryes.state';
 import { ICategoryResponse } from '@shared/models/icategory-response';
 import {ISubCategory} from '@shared/models/isubcategory';
 import {selectRouteParams, selectCurrentRoute} from '@redux/selectors/router.selectors';
-import {CATEGORY, SUBCATEGORY} from '@shared/constansts'
 import {searchCategorySubcategoryIndex} from '@shared/helper'
 
 const selectCategories = (state: IAppState) => state.categories;

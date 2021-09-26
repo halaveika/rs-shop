@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { IGoods } from '@shared/models/IGoods';
-import { SERVER_PATH_GET_CATEGORIES } from '@shared/constansts';
-import { select, Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { SetDisplayGoods, SetDisplayCategory} from '@app/redux/actions/displayData.action';
+import {  Store } from '@ngrx/store';
+import { SetDisplayCategory} from '@app/redux/actions/displayData.action';
 import {IRenderrProps} from '@shared/models/IRenderProps';
-import { ISubCategory} from '@shared/models/isubcategory';
 import {ICategoryResponse} from '@shared/models/icategory-response';
 import { selectCategoriesArr } from '@app/redux/selectors/categories.selector';
 import { IAppState } from '@redux/state/app.state';
 import {ServerShopService} from './server-shop.service'
-import { map,tap } from 'rxjs/operators';
 import {selectDisplayCategory} from '@redux/selectors/displayData.selector';
 import {IDisplayDataState} from '@redux/state/displayData.state';
 import { IGoodsParam } from '@app/shared/models/IGoodsParam';

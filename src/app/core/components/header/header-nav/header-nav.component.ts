@@ -5,8 +5,6 @@ import { IAppState } from '@app/redux/state/app.state';
 import { ICategoryResponse } from '@app/shared/models/icategory-response';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import {ServerShopService} from '@core/services/server-shop.service';
-import { IGoods } from '@app/shared/models/IGoods';
 
 @Component({
   selector: 'app-header-nav',
@@ -19,7 +17,6 @@ export class HeaderNavComponent {
   constructor(private router: Router,private store: Store<IAppState>) { }
 
   navigateHome () {
-    console.log('TO MAIJN');
     this.router.navigate(['']);
   }
 }

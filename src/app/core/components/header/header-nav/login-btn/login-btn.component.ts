@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild,ElementRef,Renderer2 } from '@angular/core';
 import {ServerShopService} from '@core/services/server-shop.service';
 import {Router} from '@angular/router';
 import { TOKEN } from '@app/shared/constansts';
@@ -15,6 +15,7 @@ import {IOrder} from '@shared/models/IUserInfo';
   styleUrls: ['./login-btn.component.scss']
 })
 export class LoginBtnComponent{
+  @ViewChild('close') closeModal!:ElementRef;
   public ordersArr$: Observable<IOrder[]>  = this.store.pipe(select(selectUserOrders));
   public cartArr$: Observable<string[]>  = this.store.pipe(select(selectUserCart));
   public favoritesArr$: Observable<string[]>  = this.store.pipe(select(selectUserFavorites));
@@ -31,9 +32,13 @@ export class LoginBtnComponent{
   public isRegister = false;
 
 
-  constructor(private store: Store<IAppState>, private serverShopService:ServerShopService,private router: Router ) {
+  constructor(private store: Store<IAppState>, private serverShopService:ServerShopService,private router: Router,private renderer: Renderer2 ) {
     this.isRegister = false;
 
+   }
+
+   closePopup(){
+    this.closeModal.nativeElement.click();
    }
 
   login() {
@@ -41,6 +46,7 @@ export class LoginBtnComponent{
       this.serverShopService.signin(this.loginValue, this.passwordValue).subscribe(
         token=> {if(token) this.serverShopService.getUserInfo().subscribe();}
       )
+      this.closePopup();
     }
   }
 
@@ -73,7 +79,7 @@ export class LoginBtnComponent{
       this.serverShopService.registration(user).subscribe(
         token=> {if(token) this.serverShopService.getUserInfo().subscribe();}
       )
-
+      this.closePopup();
   }
 
   }
