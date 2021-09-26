@@ -3,7 +3,7 @@ export interface IGoods {
   id: string,
   name: string,
   imageUrls: string[],
-  vailableAmount: number,
+  availableAmount: number,
   price: number,
   rating: number,
   description: string,

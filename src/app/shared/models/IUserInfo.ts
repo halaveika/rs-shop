@@ -17,7 +17,7 @@ export interface IOrdersDetails {
 
 export interface IOrdersItems {
     id: string,
-    amount: 0
+    amount: number
 }
 
 

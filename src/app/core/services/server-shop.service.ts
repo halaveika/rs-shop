@@ -4,13 +4,14 @@ import { ICategoryResponse } from '@shared/models/icategory-response';
 import { IGoods } from '@shared/models/IGoods';
 import { SERVER_PATH_GET_CATEGORIES, SERVER_PATH, TOKEN } from '@shared/constansts';
 import { Observable, throwError, from} from 'rxjs';
-import { catchError, tap, map, mergeMap,scan,concatMap, reduce} from 'rxjs/operators';
+import { catchError, tap, map, mergeMap,scan,concatMap, reduce, switchMap} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { GetCategories } from '@app/redux/actions/categories.action';
 import { SetDisplayGoods} from '@app/redux/actions/displayData.action';
 import { IGoodsParam } from '@app/shared/models/IGoodsParam';
 import { IUserState } from '@app/redux/state/user.state copy';
 import { AddToCart, AddToFavorite, GetUserInfo } from '@app/redux/actions/user.action';
+import {IOrder, IOrdersItems} from '@shared/models/IUserInfo';
 
 
 @Injectable()
@@ -58,10 +59,17 @@ export class ServerShopService {
     );
 }
 
+getGoodsByIdMany(ids:string[]):Observable<IGoods[]> {
+  console.dir(ids);
+  return from(ids).pipe(
+    mergeMap(id => this.http.get<IGoods[]>(`${SERVER_PATH}goods/item/${id}`)),
+    reduce((acc:IGoods[], curr) => acc.concat(curr), [])
+    )
+}
+
 
   getPopular(data:ICategoryResponse[]):Observable<IGoods[]>{
     const reqArr:{category:string,subcategory:string}[] = [];
-    const result:IGoods[] = [];
     const params = new HttpParams()
       .set('start', 0)
       .set('count', 1)
@@ -98,28 +106,66 @@ export class ServerShopService {
       );
   }
 
-  addToFavorites(id:string):Observable<string>{
-    return this.http.put<string>(`${SERVER_PATH}users/favorites`,{id})
+  addToFavorites(id:string):Observable<IUserState>{
+    return this.http.post(`${SERVER_PATH}users/favorites`,{id})
     .pipe(
-      tap((id) => this.store.dispatch(new AddToFavorite(id))),
+      mergeMap((responses):Observable<IUserState> => this.getUserInfo()),
       catchError((error) => {
         throwError(error);
-        return '';
+        return [];
       }),
       );
   }
 
-  addToCart(id:string):Observable<string>{
-    return this.http.put<string>(`${SERVER_PATH}users/cart`,{id})
+  removeFromFavorites(id:string):Observable<IUserState>{
+    const params = new HttpParams()
+      .set('id', id);
+    return this.http.delete(`${SERVER_PATH}users/favorites`, {params})
     .pipe(
-      tap((id) => this.store.dispatch(new AddToCart(id))),
+      mergeMap((responses):Observable<IUserState> => this.getUserInfo()),
       catchError((error) => {
         throwError(error);
-        return '';
+        return [];
       }),
       );
   }
 
+  addToCart(id:string):Observable<IUserState>{
+    console.dir(id);
+    return this.http.post(`${SERVER_PATH}users/cart`,{id})
+    .pipe(
+      mergeMap((responses):Observable<IUserState> => this.getUserInfo()),
+      catchError((error) => {
+        throwError(error);
+        return [];
+      }),
+      );
+  }
+
+  removeFromCart(id:string):Observable<IUserState>{
+    const params = new HttpParams()
+      .set('id', id);
+    return this.http.delete(`${SERVER_PATH}users/cart`, {params})
+    .pipe(
+      mergeMap((responses):Observable<IUserState> => this.getUserInfo()),
+      catchError((error) => {
+        throwError(error);
+        return [];
+      }),
+      );
+  }
+
+
+  postOrder(orders:IOrder):Observable<IUserState>{
+    return this.http.post(`${SERVER_PATH}users/order`,orders)
+    .pipe(
+      mergeMap((responses):Observable<IUserState> => this.getUserInfo()),
+      catchError((error) => {
+        throwError(error);
+        return [];
+      }),
+      );
+  }
 
 
 }

@@ -15,7 +15,7 @@
       <app-goods-card *ngFor="let item of (pushDataForSubcategories | async)!.goods" class="col"
       [name] = "item.name"
       [imageUrls] = "item.imageUrls"
-      [vailableAmount] = "item.vailableAmount"
+      [availableAmount] = "item.availableAmount"
       [price] = "item.price"
       [rating] = "item.rating"
       [description] = "item.description"

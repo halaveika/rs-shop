@@ -12,7 +12,7 @@ export class GoodsCardComponent{
 
   @Input() public imageUrls:string[]= [];
 
-  @Input() public vailableAmount = 0;
+  @Input() public availableAmount = 0;
 
   @Input() public price = 0;
 

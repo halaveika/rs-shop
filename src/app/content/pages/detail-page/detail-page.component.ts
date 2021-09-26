@@ -12,7 +12,7 @@ export class DetailPageComponent implements OnInit{
 
   public imageUrls:string[]= [];
 
-  public vailableAmount = 0;
+  public availableAmount = 0;
 
   public price = 0;
 
@@ -37,7 +37,7 @@ export class DetailPageComponent implements OnInit{
     this.serverShopService.getGoodsById(this.id).subscribe((item) => {
       this.name = item.name;
       this.imageUrls = item.imageUrls;
-      this.vailableAmount = item.vailableAmount;
+      this.availableAmount = item.availableAmount;
       this.price = item.price;
       this.rating = item.rating;
       this.description = item.description;
