@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainPageComponent },
   { path: 'order', loadChildren: () => import('@order/order.module').then((m) => m.OrderModule) },
+  { path: 'listorder', loadChildren: () => import('@listorder/listorder.module').then((m) => m.ListorderModule) },
   { path: 'favorite', loadChildren: () => import('@favorite/favorite.module').then((m) => m.FavoriteModule) },
   {
     path: 'category',

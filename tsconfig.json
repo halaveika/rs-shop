@@ -10,6 +10,7 @@
       "@order/*": ["app/order/*"],
       "@favorite/*": ["app/favorite/*"],
       "@content/*": ["app/content/*"],
+      "@listorder/*": ["app/listorder/*"],
       "@shared/*": ["app/shared/*"],
       "@redux/*": ["app/redux/*"],
       "@assets/*": ["app/assets/*"]

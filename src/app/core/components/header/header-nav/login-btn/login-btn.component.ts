@@ -33,7 +33,11 @@ export class LoginBtnComponent{
   linkToCart(){
     if (localStorage.getItem(TOKEN)) {
       this.router.navigate(['order',localStorage.getItem(TOKEN)])}
+  }
 
+  linkToListOrder(){
+    if (localStorage.getItem(TOKEN)) {
+      this.router.navigate(['listorder',localStorage.getItem(TOKEN)])}
   }
 
 }

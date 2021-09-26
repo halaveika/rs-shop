@@ -63,11 +63,11 @@ export class OrderPageComponent {
    postOrder(){
     if(this.detailsForm.valid){
       this.serverShopService.postOrder({
-        items: this.orderItemsArr,
+        items: this.orderItemsArr.filter(n=>n),
         details: this.details,
         id: uuidv4()
       }).subscribe();
-      this.orderItemsArr.map((item)=>this.serverShopService.removeFromCart(item.id).subscribe())
+      this.orderItemsArr.filter(n=>n).map((item)=>this.serverShopService.removeFromCart(item.id).subscribe())
     }
    }
 
