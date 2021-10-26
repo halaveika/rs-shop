@@ -1,0 +1,18 @@
+<div class="container-xl m-x-auto p-3">
+  <ol *ngFor="let item of ordersArrId$ | async; index as i" class="list-group list-group-numbered">
+    <span class="badge bg-primary rounded-pill"> Номер заказа: {{item.id}}</span>
+    <span> Адрес доставки: {{item.details.address}}</span>
+    <span> Дата заказа: {{item.details.timeToDeliver}}</span>
+    <li *ngFor="let goods of goodsArr$[i]; index as j" class="list-group-item d-flex justify-content-between align-items-start">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">{{goods.name}}</div>
+        <img [src]="goods.imageUrls[0]" alt="goods">
+      </div>
+      <div class="container-cost">
+        <span class="badge bg-primary rounded-pill" >{{item.items[i].amount * goods.price}} рублей</span>
+        <span class="badge bg-primary rounded-pill">{{item.items[i].amount}}</span>
+      </div>
+    </li>
+    <span class="badge bg-primary order-cost">Всего к оплате: {{getOrderCost(i)}} рублей </span>
+  </ol>
+</div>

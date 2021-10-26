@@ -1,0 +1,83 @@
+.main-carousel {
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+ }
+
+ .main-img {
+  width: auto;
+  height: 500px;
+  background-size: contain;
+  margin: 0 auto;
+}
+
+.main-carousel-slide{
+  position: relative;
+}
+
+.carousel-description-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: column;
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  z-index: 1;
+}
+
+.main-carousel-name {
+font-size: 24px;
+}
+
+.main-carousel-carprice {
+  font-size: 24px;
+}
+
+.carousel-bootom{
+  margin: 0 auto;
+}
+
+
+.bottom-carousel-container{
+  width: 600px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  transition: none;
+}
+
+.carousel-bottom-img-wrapper{
+  width: auto;
+  height:auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.carousel-bottom-img{
+  display: block;
+  width: 100px;
+  height: auto;
+  margin: 20px;
+}
+
+.carousel-bottom-description{
+  width: 100px;
+  height: auto;
+}
+
+.bottom-carousel-name {
+  display: block;
+  font-size: 12px;
+  }
+
+.bottom-carousel-carprice {
+    display: block;
+  font-size: 12px;
+}

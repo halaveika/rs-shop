@@ -1,0 +1,44 @@
+.login-btn_link{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  text-decoration: none;
+}
+
+.login-btn_link::after{
+  color: #1A1A1A;
+}
+
+.login-btn_text{
+  color: #1A1A1A;
+}
+
+.contact-item {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.account-menu{
+  width: 250px;
+}
+
+.counter{
+display: block;
+width: auto;
+height: auto;
+border-radius: 50%;
+background-color: #dc3545;
+color: #FFFFFF;
+padding: 1px 3px 1px 3px;
+}
+
+.btn-enter {
+  margin: 0 auto;
+}
+
+.login-title {
+  display: block;
+  margin: 0 auto;
+}

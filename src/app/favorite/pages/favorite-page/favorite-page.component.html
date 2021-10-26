@@ -1,0 +1,13 @@
+<div class="container-xl d-flex flex-row flex-wrap m-x-auto p-3">
+  <app-favorite-item *ngFor="let item of favoriteDataArr" class="col"
+  [name] = "item.name"
+  [imageUrls] = "item.imageUrls"
+  [availableAmount] = "item.availableAmount"
+  [price] = "item.price"
+  [rating] = "item.rating"
+  [description] = "item.description"
+  [id] = "item.id"
+  [isInCart] = "item.isInCart"
+  [isFavorite] = "item.isFavorite">
+  </app-favorite-item>
+</div>

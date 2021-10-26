@@ -1,0 +1,15 @@
+:host{
+  height: auto;
+}
+
+
+:host button {
+  height: 42px;
+}
+
+.header-menu{
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}

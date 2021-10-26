@@ -1,0 +1,14 @@
+<div class="card goods-card">
+  <img [src]="imageUrls[1]" class="card-img-top goods-img" alt="goods">
+  <div class="card-body goods-description-container">
+    <a [routerLink]="['../goods',id]"><span class="card-title fw-bold goods-name">{{name}}</span></a>
+    <span  *ngIf="(availableAmount); else notavailible" class="fw-lighter">в наличии</span>
+    <span class="badge bg-primary text-wrap price-item">{{price}} рублей</span>
+    <div class="rait-container" >
+      <div class="star-img" *ngFor="let stars of [].constructor(rating)"></div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="addToCart()">В корзину</button>
+  </div>
+</div>
+
+<ng-template #notavailible class="fw-lighter text-decoration-line-through">в наличии</ng-template>

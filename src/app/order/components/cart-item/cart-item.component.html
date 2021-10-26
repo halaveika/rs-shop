@@ -1,0 +1,10 @@
+  <div class="cart-img-container">
+    <img [src]="imageUrls[0]" class="card-img-top goods-img" alt="goods">
+    <button type="button" class="btn btn-link" (click)="removeFromCart()">удалить</button>
+  </div>
+  <a [routerLink]="['/category/goods',id]"><span class="card-title fw-bold goods-name">{{name}}</span></a>
+
+
+
+
+
